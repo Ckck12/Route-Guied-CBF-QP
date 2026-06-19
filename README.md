@@ -2,7 +2,11 @@
 
 Supplementary results for *Route-Guided CBF-QP Repair for Safe Vision-Language-Action Models*.
 
-**Live page:** [Open supplementary site](index.html)
+## View the project page (recommended)
+
+Do **not** open `index.html` from the file browser — it shows HTML source only.
+
+Instead, use the **Live page** button at the top of this Anonymous GitHub repository (requires GitHub Pages to be enabled in the anonymization settings). That opens the rendered supplementary site with quantitative results and video comparisons.
 
 ## Contents
 
