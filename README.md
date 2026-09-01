@@ -19,7 +19,6 @@ RSS 2026 Workshop on [Trustworthy Embodied Foundation Models](https://robot-fm-s
 
 **[Open the project page](https://ckck12.github.io/Route-Guied-CBF-QP/)** — quantitative results on SafeLIBERO (Table I–II) and side-by-side video comparisons (AEGIS vs. Ours).
 
-Do **not** open `index.html` from the GitHub file browser. That shows HTML source only.
 
 ## Contents
 
@@ -27,13 +26,6 @@ Do **not** open `index.html` from the GitHub file browser. That shows HTML sourc
 - Ablation of route-guided CBF-QP components (Table II)
 - Side-by-side qualitative video comparisons (AEGIS vs. Ours)
 
-## Local preview
-
-```bash
-python3 -m http.server 43123 --bind 0.0.0.0
-```
-
-Then open http://127.0.0.1:43123
 
 ## Citation
 
