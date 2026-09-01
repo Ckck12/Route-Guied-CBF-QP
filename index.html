@@ -4,22 +4,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Route-Guided CBF-QP Repair for Safe Vision-Language-Action Models</title>
+  <link rel="icon" href="assets/lg-mark.svg" type="image/svg+xml">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --text: #1a1a2e;
-      --muted: #5c5c7a;
-      --bg: #f8f9fc;
+      --lg-red: #A50034;
+      --lg-red-hover: #8C002C;
+      --lg-gray: #6B6C6B;
+      --lg-black: #111111;
+      --text: #1a1a1a;
+      --muted: #5c5c5c;
+      --bg: #f5f5f5;
       --surface: #ffffff;
-      --border: #e2e6ef;
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #2563eb 100%);
+      --border: #e6e6e6;
+      --accent: #A50034;
+      --accent-hover: #8C002C;
+      --hero-bg: linear-gradient(165deg, #0a0a0a 0%, #1a1a1a 55%, #2a0810 100%);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-family: "Noto Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
       line-height: 1.65;
       color: var(--text);
       background: var(--bg);
@@ -31,10 +40,39 @@
     .hero {
       background: var(--hero-bg);
       color: #fff;
-      padding: 56px 24px 48px;
+      padding: 40px 24px 48px;
       text-align: center;
+      border-bottom: 4px solid var(--lg-red);
     }
-    .hero-inner { max-width: 820px; margin: 0 auto; }
+    .hero-inner { max-width: 860px; margin: 0 auto; }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .lg-mark {
+      width: 56px;
+      height: 56px;
+      display: block;
+    }
+    .brand-copy {
+      text-align: left;
+      line-height: 1.25;
+    }
+    .brand-copy strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .brand-copy span {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 2px;
+    }
     .hero h1 {
       margin: 0 0 12px;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
@@ -43,14 +81,21 @@
       line-height: 1.25;
     }
     .hero .authors {
-      margin: 0 0 20px;
+      margin: 0 0 8px;
       font-size: 1rem;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255,255,255,0.88);
+    }
+    .hero .authors sup { font-size: 0.7em; }
+    .hero .affiliations {
+      margin: 0 0 10px;
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.55;
     }
     .hero .subtitle {
       margin: 0 0 28px;
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.82);
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.78);
       line-height: 1.5;
     }
     .badges {
@@ -90,7 +135,7 @@
       z-index: 10;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      box-shadow: 0 1px 4px rgba(165,0,52,0.08);
     }
     .nav-bar ul {
       display: flex;
@@ -113,7 +158,7 @@
       font-weight: 700;
       margin: 0 0 16px;
       padding-bottom: 8px;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid var(--lg-red);
       letter-spacing: -0.01em;
     }
     h3 { font-size: 1.05rem; margin: 0 0 8px; }
@@ -138,7 +183,7 @@
     .setup-list li:last-child { margin-bottom: 0; }
     code {
       font-size: 0.88em;
-      background: #eef1f8;
+      background: #f6ecef;
       padding: 2px 6px;
       border-radius: 4px;
     }
@@ -159,8 +204,8 @@
       padding: 9px 12px;
       text-align: center;
     }
-    table.results thead th { background: #eef1f8; font-weight: 600; }
-    table.results tbody th { background: #f7f8fb; font-weight: 600; text-align: left; }
+    table.results thead th { background: var(--lg-red); color: #fff; font-weight: 600; border-color: #8C002C; }
+    table.results tbody th { background: #faf4f6; font-weight: 600; text-align: left; }
     table.results td:first-child,
     table.results th:first-child { text-align: left; }
     table.results td:nth-child(2),
@@ -253,25 +298,70 @@
 
     /* Footer */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
+      border-top: 4px solid var(--lg-red);
+      padding: 36px 24px;
       text-align: center;
       font-size: 0.85rem;
       color: var(--muted);
-      background: var(--surface);
+      background: #111;
+      color: rgba(255,255,255,0.72);
     }
+    footer a { color: #fff; }
+    footer a:hover { color: #ffd6e0; }
     footer p { margin: 0 0 6px; }
+    .footer-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .footer-logo-wrap img {
+      width: 40px;
+      height: 40px;
+    }
+    .footer-logo-wrap span {
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 <body>
 
   <header class="hero">
     <div class="hero-inner">
+      <div class="brand-row">
+        <img class="lg-mark" src="assets/lg-mark.svg" alt="LG Electronics">
+        <div class="brand-copy">
+          <strong>LG Electronics</strong>
+          <span>Toronto AI Lab</span>
+        </div>
+      </div>
       <h1>Route-Guided CBF-QP Repair for<br>Safe Vision-Language-Action Models</h1>
-      <p class="authors">Anonymous Authors</p>
+      <p class="authors">
+        Chan Park<sup>1,3</sup>,
+        Sunwoo Hong<sup>2,3</sup>,
+        Kirak Kim<sup>2,3</sup>,
+        Yoonjeong Park<sup>2,3</sup>,<br>
+        Alexander W. Olson<sup>3</sup>,
+        Ali Pesaranghader<sup>4,*</sup>
+      </p>
+      <p class="affiliations">
+        <sup>1</sup>Sungkyunkwan University
+        &nbsp;·&nbsp;
+        <sup>2</sup>KAIST
+        &nbsp;·&nbsp;
+        <sup>3</sup>University of Toronto
+        &nbsp;·&nbsp;
+        <sup>4</sup>LG Electronics, Toronto AI Lab
+        <br>* Corresponding author
+      </p>
+      <p class="subtitle">RSS 2026 Workshop on Trustworthy Embodied Foundation Models</p>
       <div class="badges">
-        <a class="badge" href="#">📄 Paper</a>
-        <a class="badge" href="#">💻 Code</a>
+        <a class="badge" href="paper.pdf">📄 Paper</a>
+        <a class="badge" href="https://github.com/Ckck12/Route-Guied-CBF-QP" target="_blank" rel="noopener">💻 Code</a>
+        <a class="badge" href="https://ckck12.github.io/Route-Guied-CBF-QP/">🌐 Project Page</a>
         <a class="badge" href="https://github.com/THU-RCSCT/vlsa-aegis" target="_blank" rel="noopener">📊 SafeLIBERO</a>
         <a class="badge" href="https://github.com/Physical-Intelligence/openpi" target="_blank" rel="noopener">🤖 OpenPI</a>
       </div>
@@ -430,6 +520,50 @@
           <strong>ETS</strong> — Execution Time Steps.
           Arrows indicate direction of improvement (↑ higher is better, ↓ lower is better).
           Best results per metric and category are in <strong>bold</strong>.
+        </p>
+
+        <p class="table-caption" style="margin-top: 36px;">TABLE II &nbsp;·&nbsp; Ablation study of route-guided CBF-QP components.</p>
+        <div class="table-wrap">
+          <table class="results">
+            <thead>
+              <tr>
+                <th colspan="4">Components</th>
+                <th colspan="4">Average Performance</th>
+              </tr>
+              <tr>
+                <th>Path</th>
+                <th>Gate</th>
+                <th>Score</th>
+                <th>Rejoin</th>
+                <th>CAR (%)</th>
+                <th>TSR (%)</th>
+                <th>SafeSucc. (%)</th>
+                <th>ETS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>×</td><td>×</td><td>×</td><td>×</td>
+                <td>64.69</td><td>62.81</td><td>47.19</td><td><strong>109.87</strong></td>
+              </tr>
+              <tr>
+                <td>✓</td><td>✓</td><td>✓</td><td>×</td>
+                <td>67.12</td><td>63.95</td><td>47.92</td><td>112.50</td>
+              </tr>
+              <tr>
+                <td>✓</td><td>✓</td><td>×</td><td>✓</td>
+                <td>65.88</td><td>63.10</td><td>48.15</td><td>114.12</td>
+              </tr>
+              <tr>
+                <td>✓</td><td>✓</td><td>✓</td><td>✓</td>
+                <td><strong>69.06</strong></td><td><strong>65.00</strong></td><td><strong>49.69</strong></td><td>118.45</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-notes">
+          The first row is local CBF-QP repair (AEGIS) without blocked-path detection, route scoring, or rejoin.
+          The full model (last row) achieves the best average CAR, TSR, and SafeSuccess.
         </p>
       </section>
 
@@ -639,11 +773,12 @@
         <h2>Citation</h2>
         <div class="card">
           <p>If you find this work useful, please cite:</p>
-          <pre style="margin: 0; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; color: var(--muted);">@article{anonymous2026routeguided,
-  title   = {Route-Guided {CBF-QP} Repair for Safe Vision-Language-Action Models},
-  author  = {Anonymous Authors},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2026}
+          <pre style="margin: 0; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; color: var(--muted);">@inproceedings{park2026routeguided,
+  title     = {Route-Guided {CBF-QP} Repair for Safe Vision-Language-Action Models},
+  author    = {Park, Chan and Hong, Sunwoo and Kim, Kirak and Park, Yoonjeong
+               and Olson, Alexander W. and Pesaranghader, Ali},
+  booktitle = {RSS 2026 Workshop on Trustworthy Embodied Foundation Models},
+  year      = {2026}
 }</pre>
         </div>
       </section>
@@ -652,6 +787,17 @@
   </div>
 
   <footer>
+    <div class="footer-logo-wrap">
+      <img src="assets/lg-mark.svg" alt="LG Electronics">
+      <span>LG Electronics · Toronto AI Lab</span>
+    </div>
+    <p>
+      In collaboration with Sungkyunkwan University, KAIST, and the University of Toronto.
+    </p>
+    <p>
+      RSS 2026 Workshop on
+      <a href="https://robot-fm-safety.github.io/" target="_blank" rel="noopener">Trustworthy Embodied Foundation Models</a>
+    </p>
     <p>
       Benchmark:
       <a href="https://github.com/THU-RCSCT/vlsa-aegis" target="_blank" rel="noopener">SafeLIBERO</a>

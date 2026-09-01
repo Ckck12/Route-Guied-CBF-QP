@@ -1,0 +1,9 @@
+{
+  "name": "route-guided-cbf-qp-pages",
+  "private": true,
+  "description": "GitHub Pages project site for Route-Guided CBF-QP Repair",
+  "scripts": {
+    "dev": "python3 -m http.server 43123 --bind 0.0.0.0",
+    "start": "python3 -m http.server 43123 --bind 0.0.0.0"
+  }
+}
